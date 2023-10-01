@@ -3,7 +3,8 @@ package org.facchio.math;
 
 public class NaturalNumber {
 	
-	protected Integer number;
+	private Integer number;
+	private FactorizationList factorizationList = null;
 	
 
 	public NaturalNumber(Integer number) {
@@ -25,6 +26,13 @@ public class NaturalNumber {
 	
 	public boolean isPrimeNumber() {
 		return PrimeNumber.isPrimeNumber(this.getNumber());
+	}
+	
+	public FactorizationList getFactorizationList() {
+		if(this.factorizationList==null) {
+			this.factorizationList = new FactorizationList(this);
+		}
+		return this.factorizationList;
 	}
 
 }

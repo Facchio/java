@@ -6,6 +6,7 @@ public class FactorizationList {
 	
 	private NaturalNumber number;
 	private ArrayList<Integer> list = new ArrayList<Integer>();
+	private ArrayList<ExponentiatedNumber> condensedList = null;
 	
 
 	public FactorizationList(NaturalNumber number) {
@@ -50,9 +51,34 @@ public class FactorizationList {
 		}		
 	}
 	
+	private void loadCondensedList() {
+		if(this.condensedList==null) {
+			this.condensedList = new ArrayList<ExponentiatedNumber>();
+			
+					
+			for ( Integer number : this.getList()) {
+				Integer sizeList = this.condensedList.size();
+				if(sizeList == 0 || this.condensedList.get(sizeList-1).getNumber()!=number) {
+					this.condensedList.add(new ExponentiatedNumber(number));
+				}else {
+					this.condensedList.get(sizeList-1).addExponent();
+				}
+			}
+			
+		}
+	}
+	
 	public ArrayList<Integer> getList(){
 		return this.list;
 	}
+	
+	public ArrayList<ExponentiatedNumber> getCondensedList(){
+		this.loadCondensedList();
+		return this.condensedList;
+	}
+	
+	
+	
 
 	@Override
 	public String toString() {
